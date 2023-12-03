@@ -1,6 +1,8 @@
 import { Formik} from 'formik';
 import * as Yup from 'yup';
 import { BtnAddContact, ErrorMsg, FormLabel, StyledField, StyledForm } from './ContactForm.styled';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -16,17 +18,31 @@ const validationSchema = Yup.object().shape({
     .max(15, 'Invalid phone number!'),
 });
 
-export const ContactForm =({ onAdd }) => (
+export const ContactForm = () => {
+
+    const dispatch = useDispatch();
+    
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.elements.name.value;
+        const number = form.elements.number.value;
+
+        dispatch(addContact({name, number}));
+
+    }
+
     <Formik
         initialValues={{
-        name: '',
-        number: '',
+            name: '',
+            number: '',
         }}
         
         validationSchema={validationSchema}
 
         onSubmit={(values, actions) => {
-            onAdd(values);
+            handleSubmit(values);
             actions.resetForm();
         }}
     >
@@ -42,4 +58,4 @@ export const ContactForm =({ onAdd }) => (
             <BtnAddContact type="submit">Add contact</BtnAddContact>
         </StyledForm>
     </Formik>
-);
+};
