@@ -11,9 +11,11 @@ export const contactsSlice = createSlice({
             },
             prepare(name, number) {
                 return {
-                    name,
-                    number,
-                    id: nanoid(),
+                    payload: {
+                        name,
+                        number,
+                        id: nanoid(),
+                    } 
                 }
             }
         },
