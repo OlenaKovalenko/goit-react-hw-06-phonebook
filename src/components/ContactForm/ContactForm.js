@@ -1,7 +1,7 @@
 import { Formik} from 'formik';
 import * as Yup from 'yup';
 import { BtnAddContact, ErrorMsg, FormLabel, StyledField, StyledForm } from './ContactForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 
 const validationSchema = Yup.object().shape({
@@ -18,31 +18,71 @@ const validationSchema = Yup.object().shape({
     .max(15, 'Invalid phone number!'),
 });
 
-export const ContactForm = () => {
-
-    const dispatch = useDispatch();
+// export const ContactForm = () => {
+//     const contacts = useSelector(state => state.contacts.contacts);
+//     const dispatch = useDispatch();
     
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.elements.name.value;
-        const number = form.elements.number.value;
+//     const handleSubmit = newContact => {
+//         // e.preventDefault();
+//         // const form = e.target;
+//         // const name = form.elements.name.value;
+//         // const number = form.elements.number.value;
 
-        dispatch(addContact(name, number));
+//         const isExist = contacts.some(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
 
-    }
+//         if (isExist) {
+//             return alert(`${newContact.name} is alredy in contacts.`);
+//         }
 
+//         // const newContact = {
+//         //     name,
+//         //     number,
+//         // };
+
+
+//         dispatch(addContact(newContact));
+
+//     }
+
+//     <Formik
+//         initialValues={{
+//             name: '',
+//             number: '',
+//         }}
+        
+//         validationSchema={validationSchema}
+
+//         onSubmit={(values, actions) => {
+//             handleSubmit(values);
+//             actions.resetForm();
+//         }}
+//     >
+//         <StyledForm>
+//             <FormLabel htmlFor="name">Name</FormLabel>
+//             <StyledField type="text" name="name" id="name" placeholder="John Smith" />
+//             <ErrorMsg name="name" component="div" />
+
+//             <FormLabel htmlFor="number">Number</FormLabel>
+//             <StyledField type="tel" name="number" id="number" placeholder="+380..." />
+//             <ErrorMsg name="number" component="div" />
+
+//             <BtnAddContact type="submit">Add contact</BtnAddContact>
+//         </StyledForm>
+//     </Formik>
+// };
+
+export const ContactForm =({ onAdd }) => (
     <Formik
         initialValues={{
-            name: '',
-            number: '',
+        name: '',
+        number: '',
         }}
         
         validationSchema={validationSchema}
 
         onSubmit={(values, actions) => {
-            handleSubmit(values);
+            onAdd(values);
             actions.resetForm();
         }}
     >
@@ -58,4 +98,4 @@ export const ContactForm = () => {
             <BtnAddContact type="submit">Add contact</BtnAddContact>
         </StyledForm>
     </Formik>
-};
+);
