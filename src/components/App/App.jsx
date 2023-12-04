@@ -5,12 +5,12 @@ import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
 import { AppContainer, ContactsTitle, MainTitle } from './App.styled';
-import {  useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+// import {  useSelector } from 'react-redux';
+// import { getContacts } from 'redux/selectors';
 
 // const localStorageKey = 'contacts';
 export const App = () => {
-  const contacts = useSelector(getContacts);
+  // const contacts = useSelector(getContacts);
   // const dispatch = useDispatch();
 
   // const [contacts, setContacts] = useState([]);
@@ -66,13 +66,13 @@ export const App = () => {
       <MainTitle>Phonebook</MainTitle>
         <ContactForm />
         
-        {contacts.length > 0 ? (
+        {/* {contacts.length > 0 ? ( */}
           <>
             <ContactsTitle>Contacts</ContactsTitle>
             <Filter />
             <ContactList />
           </>
-        ) : null}
+        {/* ) : null} */}
 
       <GlobalStyle />
     </AppContainer>

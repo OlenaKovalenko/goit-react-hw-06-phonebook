@@ -26,17 +26,33 @@ export const ContactForm = () => {
     
     const handleSubmit = newContact => {
 
+
     const isExist = contacts.some(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
 
     if (isExist) {
         return alert(`${newContact.name} is alredy in contacts.`);
     }
 
-    dispatch(addContact(newContact))
+        dispatch(addContact(newContact));
     
     }
-    return (
+    
+    
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     const name = e.target.elements.name.value;
+    //     const number = e.target.elements.number.value;
 
+    // const isExist = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
+
+    // if (isExist) {
+    //     return alert(`${name} is alredy in contacts.`);
+    // }
+
+    // dispatch(addContact({ name, number }));
+    // }
+
+    return (
         <Formik
         initialValues={{
             name: '',
@@ -52,11 +68,11 @@ export const ContactForm = () => {
         >
         <StyledForm>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <StyledField type="text" name="name" id="name" placeholder="John Smith" />
+            <StyledField type="text" name="name" id="name" autoComplete="off" placeholder="John Smith" />
             <ErrorMsg name="name" component="div" />
 
             <FormLabel htmlFor="number">Number</FormLabel>
-            <StyledField type="tel" name="number" id="number" placeholder="+380..." />
+            <StyledField type="tel" name="number" id="number" autoComplete="off" placeholder="+380..." />
             <ErrorMsg name="number" component="div" />
 
             <BtnAddContact type="submit">Add contact</BtnAddContact>
