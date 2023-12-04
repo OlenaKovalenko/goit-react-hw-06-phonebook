@@ -24,17 +24,15 @@ export const ContactForm = () => {
     const contacts = useSelector(getContacts);
     const dispatch = useDispatch();
     
-    const handleSubmit = newContact => {
-
-
+    const handleSubmit = (newContact, actions) => {
     const isExist = contacts.some(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
 
     if (isExist) {
         return alert(`${newContact.name} is alredy in contacts.`);
     }
-
         dispatch(addContact(newContact));
-    
+        
+        actions.resetForm();
     }
     
     
@@ -61,18 +59,15 @@ export const ContactForm = () => {
         
         validationSchema={validationSchema}
         
-        onSubmit={(values, actions) => {
-            handleSubmit(values);
-            actions.resetForm();
-        }}
+        onSubmit={handleSubmit}
         >
         <StyledForm>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <StyledField type="text" name="name" id="name" autoComplete="off" placeholder="John Smith" />
+            <StyledField type="text" name="name" id="name" autoComplete="on" placeholder="John Smith" />
             <ErrorMsg name="name" component="div" />
 
             <FormLabel htmlFor="number">Number</FormLabel>
-            <StyledField type="tel" name="number" id="number" autoComplete="off" placeholder="+380..." />
+            <StyledField type="tel" name="number" id="number" autoComplete="on" placeholder="+380..." />
             <ErrorMsg name="number" component="div" />
 
             <BtnAddContact type="submit">Add contact</BtnAddContact>

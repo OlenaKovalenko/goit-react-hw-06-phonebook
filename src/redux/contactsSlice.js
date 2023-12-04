@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -8,9 +9,6 @@ export const contactsSlice = createSlice({
     initialState: [],
     reducers: {
         addContact: {
-            reducer(state, action) {
-                state.contacts = [...state.contacts, action.payload]
-                },
             prepare( {name, number} ) {
                 return {
                     payload: {
@@ -19,7 +17,10 @@ export const contactsSlice = createSlice({
                     id: nanoid(),
                     } 
                 }
-            }
+            },
+            reducer(state, action) {
+                state.contacts = [...state.contacts, action.payload]
+                },
         },
 
         deleteContact: {
