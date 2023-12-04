@@ -8,19 +8,20 @@ import { getContacts } from 'redux/selectors';
 
 export const App = () => {
   const contacts = useSelector(getContacts);
+  console.log(contacts);
 
     return (
     <AppContainer>
       <MainTitle>Phonebook</MainTitle>
         <ContactForm />
         
-        {contacts.length > 0 ? (
+        {/* {contacts.length > 0 ? ( */}
           <>
             <ContactsTitle>Contacts</ContactsTitle>
             <Filter />
             <ContactList />
           </>
-        ) : null}
+        {/* ) : null} */}
 
       <GlobalStyle />
     </AppContainer>

@@ -11,7 +11,7 @@ export const Filter = () => {
     return (
         <>
             <FilterTitle>Find contacts by name</FilterTitle>
-            <FilterInput type="text" name="name" id="nameFilter" value={filter} required onChange={() => handleFilterChange(filter)}/>
+            <FilterInput type="text" name="filter" id="filter" value={filter} required onChange={(e) => handleFilterChange(e.target.value)}/>
         </>
     )
 }
