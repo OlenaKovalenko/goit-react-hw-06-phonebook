@@ -3,12 +3,11 @@ import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
 import { AppContainer, ContactsTitle, MainTitle } from './App.styled';
-import {  useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+// import { useSelector } from 'react-redux';
+// import { getContacts } from 'redux/selectors';
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
-  console.log(contacts);
+  // const contacts = useSelector(getContacts);
 
     return (
     <AppContainer>
@@ -21,7 +20,7 @@ export const App = () => {
             <Filter />
             <ContactList />
           </>
-        {/* ) : null} */}
+        {/* ) : null}  */}
 
       <GlobalStyle />
     </AppContainer>
