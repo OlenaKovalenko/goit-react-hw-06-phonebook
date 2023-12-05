@@ -23,35 +23,9 @@ const validationSchema = Yup.object().shape({
 export const ContactForm = () => {
     const contacts = useSelector(getContacts);
     const dispatch = useDispatch();
-    
-    const handleSubmit = (newContact, actions) => {
-    const isExist = contacts.some(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
-
-    if (isExist) {
-        return alert(`${newContact.name} is alredy in contacts.`);
-    }
-        dispatch(addContact(newContact));
-        
-        actions.resetForm();
-    }
-    
-    
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     const name = e.target.elements.name.value;
-    //     const number = e.target.elements.number.value;
-
-    // const isExist = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
-
-    // if (isExist) {
-    //     return alert(`${name} is alredy in contacts.`);
-    // }
-
-    // dispatch(addContact({ name, number }));
-    // }
 
     return (
-        <Formik
+    <Formik
         initialValues={{
             name: '',
             number: '',
@@ -59,7 +33,15 @@ export const ContactForm = () => {
         
         validationSchema={validationSchema}
         
-        onSubmit={handleSubmit}
+        onSubmit={(values, actions) => {
+            const isExist = contacts.some(contact => contact.name.toLowerCase() === values.name.toLowerCase());
+
+            if (isExist) {
+                return alert(`${values.name} is alredy in contacts.`);
+            }
+            dispatch(addContact(values));
+            actions.resetForm();
+        }}
         >
         <StyledForm>
             <FormLabel htmlFor="name">Name</FormLabel>
